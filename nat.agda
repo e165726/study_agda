@@ -87,4 +87,29 @@ add-comm : (x y : Nat) -> (x + y) == (y + x)
 add-comm zero zero = refl
 add-comm zero (suc y) = cong suc (add-comm zero y) 
 add-comm (suc x) y = trans (cong suc (add-comm x y)) (add-suc y x)
- 
+
+-- TODO: 
+-- suc (x + (y + z)) == ((suc x + (y + z))の証明
+add-assoc-lemma : (x y z : Nat) -> suc (x + (y + z)) == ((suc x + (y + z))
+add-assoc-lemma zero y z = refl
+add-assoc-lemma (suc x) y z = cong suc (add-assoc-lemma x y z)
+
+-- 加法の結合則 証明
+add-assoc : (x y z : Nat) -> ((x + y) + z) ≡(x + (y + z))
+add-assoc zero y z = refl
+add-assoc (suc x) y z = trans (cong suc (add-assoc x y z)) (add-assoc-lemma x y z)
+
+-- (sac x) * y ≡y + (y * x)の証明
+mul-comm-lemma : (a b : Nat) -> (suc a * b) == (a + (a + b))
+mul-comm-lemma zero zero = refl
+-- mul-comm-lemma (suc a) b = cong suc (mul-lemma a b)
+
+-- 乗法の可換則と結合則
+mul-comm : (x y : Nat) -> (x * y) == (y * x)
+mul-comm zero zero = refl
+mul-comm zero (suc y) = mul-comm zero y
+-- mul-comm (suc x) y = trans (cong suc (mul-comm x y)) (mul-comm-lemma y x) 
+-- : (x y : Nat) -> (x * y) == (y * x)
+-- mul-comm (sac x) y = x + (x * y)  
+-- x * suc(y) = x + (x * y)
+-- mul-comm x y = ?
