@@ -1,5 +1,4 @@
-module nat:q
-where 
+module nat where 
 
 data Nat : Set where
   zero : Nat
